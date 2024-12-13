@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Encuesta de Satisfacción para Alumnos y Empleados. Tu opinión es importante.">
+    <title>Encuesta de Satisfacción</title>
+    <style>
+        /* Fondo para la pantalla principal */
+        body {
+            background-image: url('/static/logo.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #8cc5f7;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        /* Contenedor general */
+        .container {
+            max-width: 600px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* Encabezado */
+        .header h1 {
+            color: rgb(0, 0, 0); 
+            font-size: 4em; 
+            text-shadow: 2px 2px 5px rgba(0.7, 0.7, 0.7, 0.7); 
+            margin-bottom: 20px; 
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 20px; 
+            display: inline-block; 
+        }
+
+        /* Botones */
+        .buttons .btn {
+            background-color: #1bc700;
+            color: white;
+            padding: 20px 40px;
+            margin: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 22px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 300px;
+        }
+
+        .buttons .btn:hover {
+            background-color: #003f7d;
+            transform: scale(1.1);
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 3em;
+            }
+
+            .buttons .btn {
+                font-size: 18px;
+                padding: 15px 30px;
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Encuesta de Satisfacción</h1>
+        </div>
+        <div class="buttons">
+            <form action="/seleccionar_tipo" method="POST">
+                <button type="submit" name="tipo_usuario" value="alumno" class="btn">Soy Alumno</button>
+                <button type="submit" name="tipo_usuario" value="empleado" class="btn">Soy Empleado</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f4f6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #555555;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #005bb5;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #003f7d;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Encuesta</h1>
+        <form method="POST" action="/procesar_encuesta">
+            <!-- Mostrar información de carrera y departamento -->
+            <p><strong>Carrera:</strong> {{ carrera }}</p>
+            <p><strong>Departamento:</strong> {{ departamento }}</p>
+
+                        <!-- Pregunta 1 -->
+            <label for="pregunta1">¿Cómo calificarías la eficacia de nuestro servicio de atención para resolver tus consultas o problemas?</label>
+            <select id="pregunta1" name="pregunta1" required>
+                <option value="Mal">Mal</option>
+                <option value="Regular">Regular</option>
+                <option value="Bien">Bien</option>
+                <option value="Muy bien">Muy bien</option>
+                <option value="Excelente">Excelente</option>
+            </select>
+
+            <!-- Pregunta 2 -->
+            <label for="pregunta2">El área resolvió mi situación de forma...</label>
+            <select id="pregunta2" name="pregunta2" required>
+                <option value="Mal">Mal</option>
+                <option value="Regular">Regular</option>
+                <option value="Bien">Bien</option>
+                <option value="Muy Bien">Muy Bien</option>
+                <option value="Excelente">Excelente</option>
+            </select>
+
+            <!-- Pregunta 3 -->
+            <label for="pregunta3">La actitud con la que me trató el personal estuvo...</label>
+            <select id="pregunta3" name="pregunta3" required>
+                <option value="Mal">Mal</option>
+                <option value="Regular">Regular</option>
+                <option value="Bien">Bien</option>
+                <option value="Muy Bien">Muy Bien</option>
+                <option value="Excelente">Excelente</option>
+            </select>
+
+            <!-- Pregunta 4 -->
+            <label for="pregunta4">Consideras que el tiempo de atención estuvo...</label>
+            <select id="pregunta4" name="pregunta4" required>
+                <option value="Mal">Mal</option>
+                <option value="Regular">Regular</option>
+                <option value="Bien">Bien</option>
+                <option value="Muy Bien">Muy Bien</option>
+                <option value="Excelente">Excelente</option>
+            </select>
+
+            <!-- Pregunta 5 -->
+            <label for="pregunta5">Las instalaciones están limpias y ordenadas...</label>
+            <select id="pregunta5" name="pregunta5" required>
+                <option value="Mal">Mal</option>
+                <option value="Regular">Regular</option>
+                <option value="Bien">Bien</option>
+                <option value="Muy Bien">Muy Bien</option>
+                <option value="Excelente">Excelente</option>
+            </select>
+
+            <!-- Pregunta abierta -->
+            <label for="comentarios">¿Hay algún aspecto particular de nuestro servicio que te gustaría ver mejorado o modificado?</label>
+            <textarea id="comentarios" name="comentarios" rows="4" placeholder="Escribe tus comentarios aquí..." required></textarea>
+
+
+            <!-- Botón de envío -->
+            <button type="submit">Enviar Encuesta</button>
+        </form>
+    </div>
+</body>
+</html>

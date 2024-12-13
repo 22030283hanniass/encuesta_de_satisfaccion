@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta para Alumnos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Encuesta para Alumnos</h1>
+        <form method="POST" action="/alumno">
+            <!-- Selección de carrera -->
+            <label for="carrera">Selecciona tu carrera:</label>
+            <select id="carrera" name="carrera" required>
+                <option value="">-- Selecciona --</option>
+                <option value="Ing Datos">Ingeniería en Datos</option>
+                <option value="Ing Robótica">Ingeniería en Robótica</option>
+                <option value="Ing Energia">Ingeniería en Energía</option>
+            </select>
+
+            <!-- Selección de departamento -->
+            <label for="departamento">Selecciona tu departamento:</label>
+            <select id="departamento" name="departamento" required>
+                <option value="">-- Selecciona --</option>
+                <option value="Control Escolar">Control Escolar</option>
+                <option value="TIC">Tecnologías de Información y Comunicación</option>
+                <option value="Servicios Medios">Servicios Medios</option>
+                <option value="Desarrollo Docente">Desarrollo Docente</option>
+            </select>
+
+            <!-- Selección dinámica de empleados -->
+            <label for="empleado">Selecciona un empleado:</label>
+            <select id="empleado" name="empleado" required>
+                <option value="">-- Selecciona un empleado --</option>
+            </select>
+
+            <!-- Botón de envío -->
+            <button type="submit" class="btn-submit">Enviar Encuesta</button>
+        </form>
+    </div>
+
+    <!-- Script para cargar empleados dinámicamente -->
+    <script>
+        document.getElementById('departamento').addEventListener('change', function () {
+            const departamento = this.value;
+            const empleadoSelect = document.getElementById('empleado');
+
+            // Limpiar las opciones actuales
+            empleadoSelect.innerHTML = '<option value="">-- Selecciona un empleado --</option>';
+
+            // Hacer la petición al servidor solo si hay un departamento seleccionado
+            if (departamento) {
+                fetch(`/empleados/${departamento}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            alert(data.error);
+                        } else {
+                            // Agregar las opciones dinámicamente
+                            data.forEach(empleado => {
+                                const option = document.createElement('option');
+                                option.value = empleado;
+                                option.textContent = empleado;
+                                empleadoSelect.appendChild(option);
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar empleados:', error);
+                    });
+            }
+        });
+    </script>
+</body>
+</html>

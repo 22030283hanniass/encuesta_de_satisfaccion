@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Empleado</title>
+    <style>
+        /* Estilos para todo el cuerpo de la página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9; /* Fondo suave */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center; /* Centrar horizontalmente */
+            align-items: center; /* Centrar verticalmente */
+            height: 100vh; /* Altura completa de la pantalla */
+            background-image: url('/static/logo.jpg'); /* Imagen de fondo */
+            background-size: cover; /* Aseguramos que la imagen de fondo cubra toda la pantalla */
+            background-position: center; /* Centrar la imagen */
+        }
+
+        /* Contenedor del formulario */
+        .container {
+            background-color: rgb(109, 155, 255); /* Fondo blanco para el formulario */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px; /* Limitar el tamaño máximo del formulario */
+            box-sizing: border-box;
+        }
+
+        /* Estilo para los encabezados */
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2rem;
+        }
+
+        /* Estilos para los labels */
+        label {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Estilo para los select */
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px; /* Espacio entre campos */
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            background-color: #f9f9f9;
+            box-sizing: border-box;
+        }
+
+        /* Estilo para el botón de envío */
+        button {
+            background-color: #ff0000; /* Color verde */
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%; /* Hacer el botón del mismo ancho que el formulario */
+        }
+
+        /* Efecto hover para el botón */
+        button:hover {
+            background-color: #a06c45;
+        }
+
+        /* Asegurar que los inputs se alineen bien en pantallas pequeñas */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem; /* Hacer el título más pequeño en pantallas pequeñas */
+            }
+
+            button {
+                font-size: 1rem;
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Selecciona al Empleado que deseas calificar</h1>
+        <form method="POST" action="/seleccionar_empleado?departamento={{ departamento }}">
+            <label for="empleado">Selecciona el empleado a calificar:</label>
+            <select id="empleado" name="empleado" required>
+                <option value="">-- Selecciona --</option>
+                {% for empleado in empleados %}
+                    <option value="{{ empleado }}">{{ empleado }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn-submit">Continuar</button>
+        </form>
+    </div>
+</body>
+</html>

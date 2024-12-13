@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta para Alumnos</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0055ff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-size: 16px;
+            color: #555555;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #005bb5;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #003f7d;
+        }
+
+        /* Centrado en pantallas pequeñas */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Encuesta para Alumnos</h1>
+        <form method="POST" action="/encuesta_alumno">
+            <!-- Selección de carrera -->
+            <label for="carrera">Selecciona tu carrera:</label>
+            <select id="carrera" name="carrera" required>
+                <option value="">-- Selecciona --</option>
+                {% for carrera in carreras %}
+                <option value="{{ carrera }}">{{ carrera }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Selección de departamento -->
+            <label for="departamento">Selecciona un departamento a calificar:</label>
+            <select id="departamento" name="departamento" required>
+                <option value="">-- Selecciona --</option>
+                {% for departamento in departamentos %}
+                <option value="{{ departamento[0] }}">{{ departamento[0] }}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Selección de empleados -->
+            <label for="empleado">Selecciona un empleado a calificar:</label>
+            <select id="empleado" name="empleado" required>
+                <option value="">-- Selecciona un empleado --</option>
+            </select>
+
+            <!-- Botón de envío -->
+            <button type="submit">Siguiente</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('departamento').addEventListener('change', function () {
+            const departamento = this.value;
+            const empleadoSelect = document.getElementById('empleado');
+
+            empleadoSelect.innerHTML = '<option value="">-- Selecciona un empleado --</option>';
+
+            if (departamento) {
+                fetch(`/empleados/${departamento}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.forEach(empleado => {
+                            const option = document.createElement('option');
+                            option.value = empleado;
+                            option.textContent = empleado;
+                            empleadoSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Error al cargar empleados:', error));
+            }
+        });
+    </script>
+</body>
+</html>

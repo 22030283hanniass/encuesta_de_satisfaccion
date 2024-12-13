@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Empleado</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Selecciona un Empleado</h1>
+        <form method="POST" action="/seleccionar_empleado" class="form-centered">
+            <!-- Selección de departamento -->
+            <div class="form-group">
+                <label for="departamento">Selecciona un Departamento:</label>
+                <select id="departamento" name="departamento" required>
+                    <option value="">-- Selecciona --</option>
+                    {% for departamento in departamentos %}
+                        <option value="{{ departamento[0] }}">{{ departamento[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Selección dinámica de empleados -->
+            <div class="form-group">
+                <label for="empleado">Selecciona un Empleado:</label>
+                <select id="empleado" name="empleado" required aria-live="polite">
+                    <option value="">-- Selecciona un empleado --</option>
+                </select>
+            </div>
+
+            <!-- Contenedor para mensajes de error -->
+            <div id="error-message" class="error-message hidden"></div>
+
+            <button type="submit" class="btn">Continuar</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleccionar Empleado</title>
+    <style>
+        /* Fondo general */
+        body {
+            background-color: #f9f9f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Contenedor del formulario */
+        .container {
+            max-width: 600px;
+            text-align: center;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            width: 90%;
+        }
+
+        /* Encabezado */
+        .container h1 {
+            color: #005bb5;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        /* Formularios */
+        label {
+            font-weight: bold;
+            color: #333;
+            text-align: left;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Botón */
+        button {
+            background-color: #005bb5;
+            color: white;
+            padding: 15px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #003f7d;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Selecciona tu Departamento</h1>
+        <form method="POST" action="/encuesta_empleado">
+            <label for="departamento">Selecciona un Departamento:</label>
+            <select id="departamento" name="departamento" required>
+                <option value="">-- Selecciona --</option>
+                {% for departamento in departamentos %}
+                    <option value="{{ departamento[0] }}">{{ departamento[0] }}</option>
+                {% endfor %}
+            </select>
+            <label for="empleado">Selecciona un Empleado:</label>
+            <select id="empleado" name="empleado" required>
+                <option value="">-- Selecciona un empleado --</option>
+            </select>
+            <button type="submit" class="btn">Continuar</button>
+        </form>
+    </div>
+</body>
+</html>
